@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: true,
+    swcMinify: true,
+    assetPrefix: './',
     output:"export",
-    outDist:"extension/next"
+    distDir:"/extention/next"
 };
 
 export default nextConfig;

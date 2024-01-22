@@ -1,0 +1,12 @@
+{
+    "name":"tabchecker",
+    "version":"0.0",
+    "manifest_version":3,
+    "action":{
+        "default_popup":"next/index.html"
+    },
+    "permissions":[
+        "activeTab",
+        "tabs"
+    ]
+}
