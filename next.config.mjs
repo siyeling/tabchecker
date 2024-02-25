@@ -4,7 +4,10 @@ const nextConfig = {
     swcMinify: true,
     assetPrefix: './',
     output:"export",
-    distDir:"/extention/next"
+    distDir:"/extension/next",
+    images:{
+        unoptimized:true
+    }
 };
 
 export default nextConfig;

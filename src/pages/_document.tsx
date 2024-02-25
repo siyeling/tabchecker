@@ -5,7 +5,7 @@ export default function Document() {
         <Html lang="ja">
             <Head />
             <body
-                className='min-w-96'
+                className='min-w-[256px]'
             >
                 <Main />
                 <NextScript />
