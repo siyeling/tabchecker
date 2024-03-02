@@ -3,10 +3,10 @@ import type {SetStateAction,Dispatch} from "react";
 const Omnibox = ({omnibox,setOmnibox}:{omnibox:string,setOmnibox:Dispatch<SetStateAction<string>>}) => {
     return (
         <div
-            className="flex"
+            className="text-center flex"
         >
             <div
-                className="pr-4"
+                className="pr-4 py-2"
             >
                 検索box
             </div>
@@ -20,6 +20,7 @@ const Omnibox = ({omnibox,setOmnibox}:{omnibox:string,setOmnibox:Dispatch<SetSta
                 }
             />
             <button
+                className="ml-2 px-2 py-2 ring-1 bg-indigo-500 text-white"
                 onClick={()=>setOmnibox("")}
             >
                 clear

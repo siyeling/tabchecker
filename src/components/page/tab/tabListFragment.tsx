@@ -4,22 +4,17 @@ import { Dispatch,SetStateAction } from "react";
 const TabListFragment = ({tab,setTabList}:{tab:chrome.tabs.Tab,setTabList:Dispatch<SetStateAction<chrome.tabs.Tab[]>>}) => {
     return (
         <div
-            className={(tab.active ? "bg-emerald-200 ": "") + "flex justify-between ring-1"}
+            className={(tab.active ? "bg-emerald-200 ": "") + "flex justify-between ring-1 min-w-[256px]"}
         >
             <div
                 className="text-center"
             >
                 <div>
-                    windowId
-                </div>
-                <div>
-                    {tab.windowId}
-                </div>
-                <div>
-                    tabIndex:{tab.index}
+                    {tab.index}
                 </div>
             </div>
             <button
+                className="text-left ml-2"
                 onClick={
                     ()=>{
                         const tabId = tab.id;
@@ -52,6 +47,7 @@ const TabListFragment = ({tab,setTabList}:{tab:chrome.tabs.Tab,setTabList:Dispat
                 <div>{tab.title}</div>
             </button>
             <button
+                className="ml-4 border-lime"
                 onClick={
                     ()=>{
                         const tabId:number|undefined = tab.id;

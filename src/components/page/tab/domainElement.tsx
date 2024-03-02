@@ -5,10 +5,12 @@ import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 const DomainElement = ({domainList,setOmnibox}:{domainList:Map<string,{domain:string,tabId:number[]}|undefined>,setOmnibox:Dispatch<SetStateAction<string>>}) => {
     const [ isOpen, setIsOpen ] = useState<boolean>(false);
 
-    const list = Array.from(domainList.keys());
+    const list = Array.from(domainList.keys())
 
     return (
-        <div>
+        <div
+            className="text-center mb-2"
+        >
             <Popover
                 isOpen={isOpen}
                 onOpenChange={(open)=>{
@@ -18,7 +20,9 @@ const DomainElement = ({domainList,setOmnibox}:{domainList:Map<string,{domain:st
                 showArrow={true}
             >
                 <PopoverTrigger>
-                    <button>domain list</button>
+                    <button
+                        className="bg-indigo-500 text-white text-lg"
+                    >domain list</button>
                 </PopoverTrigger>
                 <PopoverContent>
                     <div
