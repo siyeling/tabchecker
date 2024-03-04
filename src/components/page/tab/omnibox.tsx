@@ -1,6 +1,16 @@
 import type {SetStateAction,Dispatch} from "react";
 
-const Omnibox = ({omnibox,setOmnibox}:{omnibox:string,setOmnibox:Dispatch<SetStateAction<string>>}) => {
+const Omnibox = ({
+    omnibox,
+    setOmnibox,
+    isAnd,
+    setIsAnd
+}:{
+    omnibox:string,
+    setOmnibox:Dispatch<SetStateAction<string>>
+    isAnd:boolean,
+    setIsAnd:Dispatch<SetStateAction<boolean>>
+}) => {
     return (
         <div
             className="text-center flex"
@@ -19,6 +29,14 @@ const Omnibox = ({omnibox,setOmnibox}:{omnibox:string,setOmnibox:Dispatch<SetSta
                     }
                 }
             />
+            <button 
+                className={(isAnd ? "bg-red-300" : "bg-emerald-300")}
+                onClick={()=>{
+                    setIsAnd((oldValue)=>!oldValue);
+                }}
+            >
+                {isAnd ? "AND" : "OR"}
+            </button>
             <button
                 className="ml-2 px-2 py-2 ring-1 bg-indigo-500 text-white"
                 onClick={()=>setOmnibox("")}

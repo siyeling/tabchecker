@@ -1,20 +1,41 @@
 import {Dispatch,SetStateAction} from "react"
 import TabListFragment from "./tabListFragment";
 
-const FilteredTabList = ({tabList,setTabList,omnibox}:{tabList:chrome.tabs.Tab[],setTabList:Dispatch<SetStateAction<chrome.tabs.Tab[]>>,omnibox:string}) => {
+const FilteredTabList = ({
+    tabList,
+    setTabList,
+    omnibox,
+    isAnd
+}:{
+    tabList:chrome.tabs.Tab[],
+    setTabList:Dispatch<SetStateAction<chrome.tabs.Tab[]>>,
+    omnibox:string,
+    isAnd:boolean
+}) => {
     return (
         <>
             {
                 tabList.filter(tab=>{
-                    const reg = new RegExp(omnibox,"i");
-                    let isCurrect:boolean = false;
-                    if(tab.title){
-                        isCurrect = tab.title.match(reg) ? true : false
+                    const splitOmniboxs = omnibox.split(/[ 　]/);
+                    const isCurrects:boolean[] = []
+                    for(const splitOmnibox of splitOmniboxs){
+                        if(!splitOmnibox) break;
+                        const reg = new RegExp(splitOmnibox,"i");
+                        let isCurrect:boolean = false;
+                        if(tab.title){
+                            isCurrect = tab.title.match(reg) ? true : false
+                        }
+                        if(tab.url){
+                            isCurrect = isCurrect ? true : (tab.url.match(reg) ? true : false);
+                        }
+                        isCurrects.push(isCurrect);
                     }
-                    if(tab.url){
-                        isCurrect = isCurrect ? true : (tab.url.match(reg) ? true : false);
+                    if(isAnd){
+                        return !isCurrects.includes(false)
                     }
-                    return isCurrect;
+                    else{
+                        return isCurrects.includes(true)
+                    }
                 }).map((tab,index)=>{
                     return (
                         <TabListFragment

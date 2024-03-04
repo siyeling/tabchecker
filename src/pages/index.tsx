@@ -14,6 +14,7 @@ const queryInfo:chrome.tabs.QueryInfo = {
 const Page = () => {
     const [ tabList, setTabList ] = useState<chrome.tabs.Tab[]>([]);
     const [ omnibox, setOmnibox ] = useState<string>("");
+    const [ isAnd, setIsAnd ] = useState<boolean>(false);
     const [ domainList, setDomainList ] = useState<Map<string,{domain:string,tabId:number[]}|undefined>>(new Map());
 
     useEffect(()=>{
@@ -60,13 +61,23 @@ const Page = () => {
                 className="sticky top-0 pb-2 bg-white ring-1"
             >
                 <DomainElement domainList={domainList} setOmnibox={setOmnibox}/>
-                <Omnibox omnibox={omnibox} setOmnibox={setOmnibox}/>
+                <Omnibox 
+                    omnibox={omnibox} 
+                    setOmnibox={setOmnibox}
+                    isAnd={isAnd}    
+                    setIsAnd={setIsAnd}
+                />
             </div>
             <div>
                 <div
                     className={omnibox ? "visibility: visible" : "visibility: hidden"}
                 >
-                    <FilteredTabList tabList={tabList} setTabList={setTabList} omnibox={omnibox} />
+                    <FilteredTabList 
+                        tabList={tabList} 
+                        setTabList={setTabList} 
+                        omnibox={omnibox}
+                        isAnd={isAnd}
+                    />
                 </div>
                 <div
                     className={omnibox ? "visibility: hidden" : "visibility: visible"}
