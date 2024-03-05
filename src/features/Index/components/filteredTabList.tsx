@@ -1,5 +1,5 @@
 import {Dispatch,SetStateAction} from "react"
-import TabListFragment from "./tabListFragment";
+import TabListFragment from "@/features/Index/components/tabListFragment";
 
 const FilteredTabList = ({
     tabList,
