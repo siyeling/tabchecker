@@ -1,5 +1,5 @@
 import {Dispatch,SetStateAction,useState} from "react"
-import TabListFragment from "./tabListFragment";
+import TabListFragment from "@/features/Index/components/tabListFragment";
 
 const AllTabList = ({tabList,setTabList}:{tabList:chrome.tabs.Tab[],setTabList:Dispatch<SetStateAction<chrome.tabs.Tab[]>>}) => {
     const [ dragIndex, setDragIndex ] = useState<number|null>();

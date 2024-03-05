@@ -1,25 +1,23 @@
 import type {SetStateAction,Dispatch} from "react";
+import TriggerButton from "@/components/element/TriggerButton/TriggerButton";
 
 const Omnibox = ({
     omnibox,
     setOmnibox,
     isAnd,
-    setIsAnd
+    setIsAnd,
+    mode
 }:{
     omnibox:string,
     setOmnibox:Dispatch<SetStateAction<string>>
     isAnd:boolean,
-    setIsAnd:Dispatch<SetStateAction<boolean>>
+    setIsAnd:Dispatch<SetStateAction<boolean>>,
+    mode:string
 }) => {
     return (
         <div
             className="text-center flex"
         >
-            <div
-                className="pr-4 py-2"
-            >
-                検索box
-            </div>
             <input
                 className="ring-1"
                 value={omnibox}
@@ -29,14 +27,11 @@ const Omnibox = ({
                     }
                 }
             />
-            <button 
-                className={(isAnd ? "bg-red-300" : "bg-emerald-300")}
-                onClick={()=>{
-                    setIsAnd((oldValue)=>!oldValue);
-                }}
-            >
-                {isAnd ? "AND" : "OR"}
-            </button>
+            <TriggerButton
+                text={isAnd ? (mode === "and" ? "AND" : "NAND") : (mode === "and" ? "OR" : "NOR")}
+                state={isAnd}
+                setState={setIsAnd}
+            />
             <button
                 className="ml-2 px-2 py-2 ring-1 bg-indigo-500 text-white"
                 onClick={()=>setOmnibox("")}

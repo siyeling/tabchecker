@@ -13,8 +13,10 @@ const queryInfo:chrome.tabs.QueryInfo = {
 
 const Index = () => {
     const [ tabList, setTabList ] = useState<chrome.tabs.Tab[]>([]);
-    const [ omnibox, setOmnibox ] = useState<string>("");
+    const [ includeOmnibox, setIncludeOmnibox ] = useState<string>("");
+    const [ excludeOmnibox, setExcludeOmnibox ] = useState<string>("");
     const [ isAnd, setIsAnd ] = useState<boolean>(false);
+    const [ isNand, setIsNand ] = useState<boolean>(false);
     const [ domainList, setDomainList ] = useState<Map<string,{domain:string,tabId:number[]}|undefined>>(new Map());
 
     useEffect(()=>{
@@ -60,27 +62,43 @@ const Index = () => {
             <div
                 className="sticky top-0 pb-2 bg-white ring-1"
             >
-                <DomainElement domainList={domainList} setOmnibox={setOmnibox}/>
+                <DomainElement
+                    domainList={domainList} 
+                    setOmnibox={setIncludeOmnibox}
+                />
+                <div>
+                    検索box
+                </div>
                 <Omnibox 
-                    omnibox={omnibox} 
-                    setOmnibox={setOmnibox}
+                    omnibox={includeOmnibox} 
+                    setOmnibox={setIncludeOmnibox}
                     isAnd={isAnd}    
                     setIsAnd={setIsAnd}
+                    mode="and"
+                />
+                <Omnibox 
+                    omnibox={excludeOmnibox} 
+                    setOmnibox={setExcludeOmnibox}
+                    isAnd={isNand}    
+                    setIsAnd={setIsNand}
+                    mode="nand"
                 />
             </div>
             <div>
                 <div
-                    className={omnibox ? "visibility: visible" : "visibility: hidden"}
+                    className={(includeOmnibox || excludeOmnibox) ? "visibility: visible" : "visibility: hidden"}
                 >
                     <FilteredTabList 
                         tabList={tabList} 
                         setTabList={setTabList} 
-                        omnibox={omnibox}
+                        includeOmnibox={includeOmnibox}
+                        excludeOmnibox={excludeOmnibox}
                         isAnd={isAnd}
+                        isNand={isNand}
                     />
                 </div>
                 <div
-                    className={omnibox ? "visibility: hidden" : "visibility: visible"}
+                    className={(includeOmnibox || excludeOmnibox) ? "visibility: hidden" : "visibility: visible"}
                 >
                     <AllTabList tabList={tabList} setTabList={setTabList} />
                 </div>
